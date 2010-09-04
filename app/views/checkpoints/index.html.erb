@@ -1,0 +1,27 @@
+<h1>Listing checkpoints</h1>
+
+<table>
+  <tr>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @checkpoints.each do |checkpoint| %>
+  <tr>
+    <td><%= checkpoint.latitude %></td>
+    <td><%= checkpoint.longitude %></td>
+    <td><%= checkpoint.user_id %></td>
+    <td><%= link_to 'Show', checkpoint %></td>
+    <td><%= link_to 'Edit', edit_checkpoint_path(checkpoint) %></td>
+    <td><%= link_to 'Destroy', checkpoint, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Checkpoint', new_checkpoint_path %>

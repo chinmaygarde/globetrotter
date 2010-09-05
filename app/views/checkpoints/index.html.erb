@@ -14,14 +14,18 @@
   <tr>
     <td><%= checkpoint.latitude %></td>
     <td><%= checkpoint.longitude %></td>
-    <td><%= checkpoint.user_id %></td>
-    <td><%= link_to 'Show', checkpoint %></td>
-    <td><%= link_to 'Edit', edit_checkpoint_path(checkpoint) %></td>
-    <td><%= link_to 'Destroy', checkpoint, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= checkpoint.user.username %></td>
+    <td><%= link_to 'Show', user_checkpoint_path(checkpoint.user, checkpoint) %></td>
+    <td><%= link_to 'Edit', edit_user_checkpoint_path(checkpoint.user, checkpoint) %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
+<% if @checkpoints.first != nil %>
+  <% if !@checkpoints.first.user == current_user %>
+    <%= link_to 'New Checkpoint', new_user_checkpoint_path(current_user) %>
+  <% end %>
+<% end %>
 
-<%= link_to 'New Checkpoint', new_checkpoint_path %>
+

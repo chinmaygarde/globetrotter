@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to(root_url, :notice => 'Successfully logged in.') }
+        format.html { redirect_to(user_checkpoints_path(current_user), :notice => 'Successfully logged in.') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
         format.html { render :action => "new" }

@@ -12,9 +12,9 @@
 
 <p>
   <b>User:</b>
-  <%= @checkpoint.user_id %>
+  <%= @checkpoint.user.username %>
 </p>
 
 
-<%= link_to 'Edit', edit_checkpoint_path(@checkpoint) %> |
-<%= link_to 'Back', checkpoints_path %>
+<%= link_to 'Edit', edit_user_checkpoint_path(@checkpoint.user ,@checkpoint) %> |
+<%= link_to 'Back', user_checkpoints_path(@checkpoint.user) %>

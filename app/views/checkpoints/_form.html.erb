@@ -1,4 +1,4 @@
-<%= form_for(@checkpoint) do |f| %>
+<%= form_for([@checkpoint.user, @checkpoint]) do |f| %>
   <% if @checkpoint.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@checkpoint.errors.count, "error") %> prohibited this checkpoint from being saved:</h2>
@@ -18,10 +18,6 @@
   <div class="field">
     <%= f.label :longitude %><br />
     <%= f.text_field :longitude %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

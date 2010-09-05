@@ -3,7 +3,7 @@ class CheckpointsController < ApplicationController
   # GET /checkpoints
   # GET /checkpoints.xml
   def index
-    @checkpoints = Checkpoint.all
+    @checkpoints = Checkpoint.find_all_by_user_id params[:user_id]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +26,7 @@ class CheckpointsController < ApplicationController
   # GET /checkpoints/new.xml
   def new
     @checkpoint = Checkpoint.new
-
+    @checkpoint.user = current_user
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @checkpoint }
@@ -42,10 +42,10 @@ class CheckpointsController < ApplicationController
   # POST /checkpoints.xml
   def create
     @checkpoint = Checkpoint.new(params[:checkpoint])
-
+    @checkpoint.user = current_user
     respond_to do |format|
       if @checkpoint.save
-        format.html { redirect_to(@checkpoint, :notice => 'Checkpoint was successfully created.') }
+        format.html { redirect_to(user_checkpoint_url(@checkpoint.user, @checkpoint), :notice => 'Checkpoint was successfully created.') }
         format.xml  { render :xml => @checkpoint, :status => :created, :location => @checkpoint }
       else
         format.html { render :action => "new" }
@@ -58,10 +58,10 @@ class CheckpointsController < ApplicationController
   # PUT /checkpoints/1.xml
   def update
     @checkpoint = Checkpoint.find(params[:id])
-
+    @checkpoint.user = current_user
     respond_to do |format|
       if @checkpoint.update_attributes(params[:checkpoint])
-        format.html { redirect_to(@checkpoint, :notice => 'Checkpoint was successfully updated.') }
+        format.html { redirect_to([@checkpoint.user, @checkpoint], :notice => 'Checkpoint was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,8 +74,11 @@ class CheckpointsController < ApplicationController
   # DELETE /checkpoints/1.xml
   def destroy
     @checkpoint = Checkpoint.find(params[:id])
-    @checkpoint.destroy
-
+    if @checkpoint.user == current_user
+      flash[:notice] = "This is not your checkpoint"
+    else
+      @checkpoint.destroy      
+    end
     respond_to do |format|
       format.html { redirect_to(checkpoints_url) }
       format.xml  { head :ok }

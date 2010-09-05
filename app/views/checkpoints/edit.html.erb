@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @checkpoint %> |
-<%= link_to 'Back', checkpoints_path %>
+<%= link_to 'Show', [@checkpoint.user , @checkpoint] %> |
+<%= link_to 'Back', user_checkpoints_path(@checkpoint.user) %>

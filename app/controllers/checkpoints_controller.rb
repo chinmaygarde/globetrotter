@@ -1,4 +1,5 @@
 class CheckpointsController < ApplicationController
+  before_filter :authorize
   # GET /checkpoints
   # GET /checkpoints.xml
   def index

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
 
+  before_filter :authorize, :except => [:new]
+  
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
+    @user = User.find current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+    @user = User.find current_user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

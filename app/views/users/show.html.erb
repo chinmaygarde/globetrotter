@@ -1,13 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<p><%= image_tag gravatar(current_user.email) %></p>
+
 <p>
   <b>Username:</b>
   <%= @user.username %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
 </p>
 
 <p>

@@ -57,7 +57,7 @@ Globetrotter::Application.routes.draw do
   #     resources :products
   #   end
 
-  root :to => "checkpoints#index"
+  root :to => "home#index"
 
   # See how all your routes lay out with "rake routes"
 

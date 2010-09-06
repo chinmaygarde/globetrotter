@@ -1,6 +1,6 @@
-<h1>Editing user</h1>
-
+<h1>Editing Profile</h1>
+<p><%= image_tag gravatar(current_user) %></p>
 <%= render 'form' %>
 
 <%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', user_path(@user) %>

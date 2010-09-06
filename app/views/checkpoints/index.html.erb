@@ -1,31 +1,27 @@
-<h1>Listing checkpoints</h1>
+<h1>Listing checkpoints for <%= @user.username %></h1>
 
-<table>
-  <tr>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @checkpoints.each do |checkpoint| %>
-  <tr>
-    <td><%= checkpoint.latitude %></td>
-    <td><%= checkpoint.longitude %></td>
-    <td><%= checkpoint.user.username %></td>
-    <td><%= link_to 'Show', user_checkpoint_path(checkpoint.user, checkpoint) %></td>
-    <td><%= link_to 'Edit', edit_user_checkpoint_path(checkpoint.user, checkpoint) %></td>
-  </tr>
+<% if !@checkpoints.blank? %>
+	<table>
+	  <tr>
+	    <th>Latitude</th>
+	    <th>Longitude</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	<% @checkpoints.each do |checkpoint| %>
+	  <tr>
+	    <td><%= checkpoint.latitude %></td>
+	    <td><%= checkpoint.longitude %></td>
+	    <td><%= link_to 'Show', user_checkpoint_path(checkpoint.user, checkpoint) %></td>
+	    <td><%= link_to 'Edit', edit_user_checkpoint_path(checkpoint.user, checkpoint) %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% else %>
+	<p><%= @user.username %> has no checkpoints :(</p>
 <% end %>
-</table>
 
 <br />
-<% if @checkpoints.first != nil %>
-  <% if !@checkpoints.first.user == current_user %>
-    <%= link_to 'New Checkpoint', new_user_checkpoint_path(current_user) %>
-  <% end %>
+<% if current_user %>
+	<%= link_to 'Add New Checkpoint', new_user_checkpoint_path(current_user) %>
 <% end %>
-
-

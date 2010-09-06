@@ -4,7 +4,7 @@ class CheckpointsController < ApplicationController
   # GET /checkpoints.xml
   def index
     @checkpoints = Checkpoint.find_all_by_user_id params[:user_id]
-
+    @user = User.find params[:user_id]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @checkpoints }

@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:new, :create]
+  before_filter :authorize, :except => [:new, :create, :show]
   
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find current_user
+    @user = User.find params[:id]
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p><%= image_tag gravatar(current_user.email) %></p>
+<p><%= image_tag gravatar(@user) %></p>
 
 <p>
   <b>Username:</b>
@@ -12,6 +12,33 @@
   <%= @user.email %>
 </p>
 
+<p>
+	<% if @user.friendships.blank? %>
+	  <b>No friends :(</b>
+	<% else %>
+		<b><%= @user.username %>'s Friends:</b><br />
+		<ul style="list-style-type: none">
+		  <% for friendship in @user.friendships %>
+	    	<li><%= image_tag gravatar(friendship.friend) %><br/>
+				<%= friendship.friend.username %> (<%= link_to "Remove", friendship, :method => :delete %>)<br />
+			</li>
+		  <% end %>			
+		</ul>
+	<% end %>
+	
+</p>
 
+<%= link_to 'Checkpoints', user_checkpoints_path(@user) %> | 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', user_path(@user) %> | 
+<% if current_user %>
+	<% if @user == current_user %>
+		This is You!
+	<% else %>
+		<%= link_to "Add as friend",  friendships_path(:friend_id => @user), :method => :post %>
+	<% end %>
+<% else %>
+	<%= @user.username %> is using GlobeTrotter. <%= link_to "Join now", register_path %>
+<% end %>
+
+

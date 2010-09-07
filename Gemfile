@@ -2,19 +2,15 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
 gem 'jquery-rails'
-gem 'thinking-sphinx', '2.0.0.rc1', :require => 'thinking_sphinx'
 
-gem "ruby-openid"
-gem "rack-openid", ">=0.2.1", :require => "rack/openid"
-gem "authlogic"
-gem "oauth"
-gem "oauth2"
-gem "authlogic-connect"
+gem 'authlogic'
+gem 'geokit'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'mysql'
 
 # Use unicorn as the web server
 # gem 'unicorn'

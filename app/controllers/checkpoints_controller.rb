@@ -45,7 +45,7 @@ class CheckpointsController < ApplicationController
     @checkpoint.user = current_user
     respond_to do |format|
       if @checkpoint.save
-        format.html { redirect_to(user_checkpoint_url(@checkpoint.user, @checkpoint), :notice => 'Checkpoint was successfully created.') }
+        format.html { redirect_to(user_checkpoints_url(@checkpoint.user), :notice => 'Checkpoint was successfully created.') }
         format.xml  { render :xml => @checkpoint, :status => :created, :location => @checkpoint }
       else
         format.html { render :action => "new" }

@@ -1,5 +1,5 @@
 <h1>Listing checkpoints for <%= @user.username %></h1>
-
+<div id="map_canvas" style="width:100%; height:480px"></div>
 <% if !@checkpoints.blank? %>
 	<table>
 	  <tr>
@@ -25,3 +25,44 @@
 <% if current_user %>
 	<%= link_to 'Add New Checkpoint', new_user_checkpoint_path(current_user) %>
 <% end %>
+
+
+<!-- Maps Javascript -->
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+		<% if !@checkpoints.blank? %>
+			var myLatlng = new google.maps.LatLng(<%= @checkpoints.first.latitude %>,<%= @checkpoints.first.longitude %>);
+		<% else %>
+			var myLatlng = new google.maps.LatLng(37.323,-122.031);
+		<% end %>		
+		
+		var myOptions = {
+			zoom: 4,
+			center: myLatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		<% if !@checkpoints.blank? %>
+		  <% for checkpoint in @checkpoints %>
+			var image = new google.maps.MarkerImage("<%= gravatar(checkpoint.user) %>?s=30",
+			      // This marker is 20 pixels wide by 32 pixels tall.
+			      new google.maps.Size(30, 30),
+			      // The origin for this image is 0,0.
+			      new google.maps.Point(0,0),
+			      // The anchor for this image is the base of the flagpole at 0,32.
+			      new google.maps.Point(-15, 30));
+			var myLatLng = new google.maps.LatLng(<%= checkpoint.latitude %>, <%= checkpoint.longitude %>);
+			var marker = new google.maps.Marker({
+			    position: myLatLng,
+			    map: map,
+			    icon: image
+			});
+			var pin = new google.maps.Marker({
+			    position: myLatLng,
+			    map: map
+			});
+		  <% end %>
+		<% end %>
+	});
+</script>

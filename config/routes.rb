@@ -1,5 +1,7 @@
 Globetrotter::Application.routes.draw do
 
+  resources :quests
+
   resources :friendships
 
   match "login", :to => "user_sessions#new", :as => "login"

@@ -1,0 +1,18 @@
+<h1>Listing quests</h1>
+
+<% @quests.each do |quest| %>
+  
+  <h3><%= quest.title %></h3>
+  <p><%= quest.description %></p>
+  <p>Quest master is <b><%= link_to quest.quest_master.username, user_path(quest.quest_master) %></b></p>
+  <p>Goal Distance: <b><%= quest.distance %></b></p>
+  <p><%= link_to 'Show', quest %> | 
+	<% if !current_user.nil? && current_user == quest.quest_master %>
+  	<%= link_to 'Edit', edit_quest_path(quest) %> | 
+  	<%= link_to 'Destroy', quest, :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+  </p>
+  <hr />
+<% end %>
+
+<%= link_to 'New Quest', new_quest_path %>

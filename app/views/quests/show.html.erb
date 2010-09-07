@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @quest.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @quest.description %>
+</p>
+
+<p>
+  <b>Quest master:</b>
+  <%= link_to @quest.quest_master.username, user_path(@quest.quest_master) %>
+</p>
+
+<p>
+  <b>Distance:</b>
+  <%= @quest.distance %>
+</p>
+
+
+<%= link_to 'Edit', edit_quest_path(@quest) %> |
+<%= link_to 'Back', quests_path %>

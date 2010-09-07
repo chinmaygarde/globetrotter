@@ -1,0 +1,1 @@
+DEFAULT_QUEST = YAML.load_file(File.join(Rails.root, "config", "default_quest.yml"))

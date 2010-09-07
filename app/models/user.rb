@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
   
   acts_as_authentic
   
+  define_index do
+    indexes username, :sortable => true
+    indexes email, :sortable => true
+  end
+  
   private
   def add_life_quest
     quest = quests.build(:title => DEFAULT_QUEST["title"], :description => DEFAULT_QUEST["description"], :distance => DEFAULT_QUEST["distance"])

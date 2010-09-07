@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, :except => [:new, :create, :show]
+  before_filter :authorize, :except => [:new, :create, :show, :suggest]
   
   # GET /users/1
   # GET /users/1.xml
@@ -61,4 +61,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def suggest
+    users = User.search("*#{params[:q]}*")
+    data = Array.new
+    users.each do |user|
+      data << {"name" => "#{user.username} (#{user.email})", "image" => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}.jpg", "value" => "#{user.id}"}
+    end
+    respond_to do |format|
+      format.json { render :json => data }
+    end
+  end  
 end

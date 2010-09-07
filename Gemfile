@@ -5,7 +5,7 @@ gem 'jquery-rails'
 
 gem 'authlogic'
 gem 'geokit'
-
+gem 'thinking-sphinx', '2.0.0.rc1', :require => 'thinking_sphinx'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

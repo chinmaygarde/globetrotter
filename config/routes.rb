@@ -12,6 +12,9 @@ Globetrotter::Application.routes.draw do
 
   resources :users do
     resources :checkpoints
+    collection do
+      get 'suggest'
+    end
   end
 
   # The priority is based upon order of creation:

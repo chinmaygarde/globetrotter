@@ -8,7 +8,23 @@
 	<title>Globetrotter</title>
 		<%= stylesheet_link_tag :all %>
 		<%= javascript_include_tag :defaults %>
+		<%= javascript_include_tag "autosuggest" %>	
 		<%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=true" %>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$("#people_input").autoSuggest("<%= suggest_users_path(:format => :json) %>", {
+									selectedItemProp: "name",
+									searchObjProps: "name",
+									formatList: function(data, elem){
+										var element = elem.html("<div><img src=" + data.image + "?s=28\">&nbsp;&nbsp;" + data.name + "</div>");
+										return element;
+									},
+									startText: "Search Users",
+									resultClick: function(data){
+										window.location = "<%= users_path %>" + "/" + data.attributes.value
+									}});
+			});
+		</script>
 		<%= csrf_meta_tag %>
 </head>
 <body>
@@ -25,6 +41,9 @@
 				<%= link_to "Register", register_path %> | 
 				<%= link_to "Login", login_path %>
 			<% end %>
+		</div>
+		<div class="friends_management">
+			<input type="text" name="people" value="" id="people_input">
 		</div>
 	</div>	
 	<div id="content">

@@ -5,6 +5,8 @@ class Journey < ActiveRecord::Base
   
   after_create :calculate_distance
   
+  validates_presence_of :from_checkpoint, :to_checkpoint
+  
   private
   def calculate_distance
     self.distance = from_checkpoint.distance_to(to_checkpoint) if self.distance.nil?

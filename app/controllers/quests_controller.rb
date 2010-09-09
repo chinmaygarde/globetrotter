@@ -3,8 +3,11 @@ class QuestsController < ApplicationController
   # GET /quests
   # GET /quests.xml
   def index
-    @quests = Quest.all
-
+    if params[:user_id]
+          @quests = User.find(params[:user_id]).quests
+    else
+          @quests = Quest.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @quests }
@@ -45,7 +48,7 @@ class QuestsController < ApplicationController
     @quest.quest_master = current_user
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to(@quest, :notice => 'Quest was successfully created.') }
+        format.html { redirect_to([@quest.quest_master, @quest], :notice => 'Quest was successfully created.') }
         format.xml  { render :xml => @quest, :status => :created, :location => @quest }
       else
         format.html { render :action => "new" }
@@ -61,7 +64,7 @@ class QuestsController < ApplicationController
     @quest.quest_master = current_user
     respond_to do |format|
       if @quest.update_attributes(params[:quest])
-        format.html { redirect_to(@quest, :notice => 'Quest was successfully updated.') }
+        format.html { redirect_to([@quest.quest_master, @quest], :notice => 'Quest was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,7 +80,7 @@ class QuestsController < ApplicationController
     @quest.destroy
 
     respond_to do |format|
-      format.html { redirect_to(quests_url) }
+      format.html { redirect_to(user_quests_path(@quest.quest_master)) }
       format.xml  { head :ok }
     end
   end

@@ -20,6 +20,7 @@
   <%= @quest.distance %>
 </p>
 
+<% if !current_user.nil? && current_user == @quest.quest_master %>
+	<%= link_to 'Edit', edit_user_quest_path(@quest.quest_master, @quest) %>
+<% end %>
 
-<%= link_to 'Edit', edit_quest_path(@quest) %> |
-<%= link_to 'Back', quests_path %>

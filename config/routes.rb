@@ -1,7 +1,7 @@
 Globetrotter::Application.routes.draw do
 
-  resources :quests
-
+  resources :quests, :only => [:index]
+  resources :checkpoints, :only => [:index]
   resources :friendships
 
   match "login", :to => "user_sessions#new", :as => "login"
@@ -12,6 +12,7 @@ Globetrotter::Application.routes.draw do
 
   resources :users do
     resources :checkpoints
+    resources :quests
     collection do
       get 'suggest'
     end

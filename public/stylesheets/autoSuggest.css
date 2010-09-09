@@ -20,7 +20,7 @@ ul.as-selections.loading {
 }
 
 ul.as-selections li {
-	float: left;
+	float: right;
 	margin: 1px 4px 1px 0;
 }
 
@@ -106,7 +106,8 @@ ul.as-selections li.as-original input {
 	border: none;
 	outline: none;
 	font-size: 13px;
-	width: 120px;
+	text-align: right;
+	width: 350px;
 	height: 18px;
 	padding-top: 3px;
 }

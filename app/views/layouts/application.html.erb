@@ -13,16 +13,17 @@
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function(){
 				$("#people_input").autoSuggest("<%= suggest_users_path(:format => :json) %>", {
-									selectedItemProp: "name",
-									searchObjProps: "name",
-									formatList: function(data, elem){
-										var element = elem.html("<div><img src=" + data.image + "?s=28\">&nbsp;&nbsp;" + data.name + "</div>");
-										return element;
-									},
-									startText: "Search Users",
-									resultClick: function(data){
-										window.location = "<%= users_path %>" + "/" + data.attributes.value
-									}});
+					selectedItemProp: "name",
+					searchObjProps: "name",
+					formatList: function(data, elem){
+						var element = elem.html("<div><img src=" + data.image + "?s=28\">&nbsp;&nbsp;" + data.name + "</div>");
+						return element;
+					},
+					startText: "Find Users",
+					resultClick: function(data){
+						window.location = "<%= users_path %>" + "/" + data.attributes.value
+					}
+				});
 			});
 		</script>
 		<%= csrf_meta_tag %>
@@ -42,8 +43,25 @@
 				<%= link_to "Login", login_path %>
 			<% end %>
 		</div>
+		<hr />
 		<div class="friends_management">
 			<input type="text" name="people" value="" id="people_input">
+		</div>
+		<div class="links">
+			<ul>
+				<% if current_user %>
+					<li><%= link_to "Add new Checkpoint", new_user_checkpoint_path(current_user) %></li>
+					<li><%= link_to "My Checkpoints", user_checkpoints_path(current_user) %></li>
+					<li><%= link_to "My Quests", user_quests_path(current_user) %></li>
+					<li>Badges</li>
+					<li><%= link_to "Top Globetrotters", users_path %></li>
+				<% else %>
+					<li><%= link_to "Checkpoints", checkpoints_path %></li>
+					<li><%= link_to "Quests", quests_path %></li>
+					<li>Badges</li>
+					<li><%= link_to "Top Globetrotters", users_path %></li>
+				<% end %>
+			</ul>
 		</div>
 	</div>	
 	<div id="content">

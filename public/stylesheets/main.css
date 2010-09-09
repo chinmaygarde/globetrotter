@@ -107,13 +107,32 @@ pre {
 }
 
 #header .user_management {
+	padding-top: 20px;
+	padding-bottom: 20px;
 	text-align: right;
 }
 #header .user_management a {
 	color: #FFFDD8;
 	font-size: 18px;
 }
-
+#header .friends_management {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	text-align: right;
+}
+#header .links {
+	text-align: right;
+	font-size: 22px;
+}
+#header .links ul {
+	list-style-type: none;
+}
+#header .links li {
+	padding-top: 5px;
+}
+#header .links a {
+	color: #FFFDD8;
+}
 /* Content */
 #content {
 	

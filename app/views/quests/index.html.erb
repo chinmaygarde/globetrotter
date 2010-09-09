@@ -6,13 +6,19 @@
   <p><%= quest.description %></p>
   <p>Quest master is <b><%= link_to quest.quest_master.username, user_path(quest.quest_master) %></b></p>
   <p>Goal Distance: <b><%= quest.distance %></b></p>
-  <p><%= link_to 'Show', quest %> | 
+  <p>
 	<% if !current_user.nil? && current_user == quest.quest_master %>
-  	<%= link_to 'Edit', edit_quest_path(quest) %> | 
-  	<%= link_to 'Destroy', quest, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Show', user_quest_path(current_user, quest) %> | 
+  		<%= link_to 'Edit', edit_user_quest_path(quest.quest_master, quest) %> | 
+  		<%= link_to 'Destroy', [quest.quest_master, quest], :confirm => 'Are you sure?', :method => :delete %>
+	<% else %>
+		<%= link_to 'Details', user_quest_path(quest.quest_master, quest) %>
 	<% end %>
   </p>
   <hr />
 <% end %>
+<% if !current_user.nil? %>
+	<%= link_to 'New Quest', new_user_quest_path(current_user) %>
+<% end %>
 
-<%= link_to 'New Quest', new_quest_path %>
+

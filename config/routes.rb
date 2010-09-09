@@ -1,7 +1,6 @@
 Globetrotter::Application.routes.draw do
 
   resources :quests, :only => [:index]
-  resources :checkpoints, :only => [:index]
   resources :friendships
 
   match "login", :to => "user_sessions#new", :as => "login"

@@ -1,13 +1,9 @@
 class CheckpointsController < ApplicationController
-  before_filter :authorize, :except => [:index]
+  before_filter :authorize
   # GET /checkpoints
   # GET /checkpoints.xml
   def index
-    if params[:user_id]
-      @checkpoints = Checkpoint.find_all_by_user_id params[:user_id]
-    else
-      @checkpoints = Checkpoint.find :all
-    end
+    @checkpoints = Checkpoint.find_all_by_user_id params[:user_id]
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @checkpoints }

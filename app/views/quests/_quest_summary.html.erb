@@ -1,0 +1,19 @@
+<p>
+  <b>Title:</b>
+  <%= quest.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= quest.description %>
+</p>
+
+<p>
+  <b>Quest master:</b>
+  <%= link_to quest.quest_master.username, user_path(quest.quest_master) %>
+</p>
+
+<p>
+  <b>Distance:</b>
+  <%= quest.distance %>
+</p>

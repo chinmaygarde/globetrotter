@@ -1,11 +1,6 @@
 <% if !@users.blank? %>
   <% for user in @users %>
-	<div class="user_details">
-		<%= link_to image_tag(gravatar(user)), user_path(user) %>
-	    <%=  %>
-		<b><%= user.username %></b><br />
-		Member since <%= time_ago_in_words(user.created_at) %>
-	</div>
+	<%= render :partial => "users/user_profile_small", :locals => { :user => user }%>
 	<hr />
   <% end %>
 <% else %>

@@ -1,7 +1,8 @@
 Globetrotter::Application.routes.draw do
 
   resources :quests, :only => [:index]
-  resources :friendships
+  resources :friendships, :only => [:create, :destroy]
+  resources :quest_memberships, :only => [:create, :destroy]
 
   match "login", :to => "user_sessions#new", :as => "login"
   match "logout", :to => "user_sessions#destroy", :as => "logout"

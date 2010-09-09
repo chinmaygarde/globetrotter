@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :journeys
   has_many :quests, :class_name => "Quest", :foreign_key => "quest_master"
   
+  has_many :quest_memberships, :class_name => "QuestMembership", :foreign_key => "user_id"
+  has_many :quests_as_member, :through => :quest_memberships, :source => :quest
+  
   after_create :add_life_quest
   
   acts_as_authentic

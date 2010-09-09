@@ -1,0 +1,6 @@
+<div class="user_details_small">
+	<%= link_to image_tag(gravatar(user)), user_path(user) %>
+	<b><%= link_to user.username, user_path(user) %></b>
+	<br />
+	Member Since: <%= time_ago_in_words(user.created_at) %>
+</div>

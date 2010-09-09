@@ -1,26 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @quest.title %>
-</p>
+<%= render :partial => "quest_summary", :locals => { :quest => @quest } %>
 
-<p>
-  <b>Description:</b>
-  <%= @quest.description %>
-</p>
+<% if !@quest.members.blank? %>
+  <% for user in @quest.members %>
+    <hr />
+	<%= render :partial => "users/user_profile_small", :locals => {:user => user} %>
+	<br />
+  <% end %>
+<% else %>
+<p>This quest has no members</p>  
+<% end %>
 
-<p>
-  <b>Quest master:</b>
-  <%= link_to @quest.quest_master.username, user_path(@quest.quest_master) %>
-</p>
 
-<p>
-  <b>Distance:</b>
-  <%= @quest.distance %>
-</p>
-
-<% if !current_user.nil? && current_user == @quest.quest_master %>
-	<%= link_to 'Edit', edit_user_quest_path(@quest.quest_master, @quest) %>
+<% if !current_user.nil? %>
+	<% if current_user == @quest.quest_master %>
+		<%= link_to 'Edit', edit_user_quest_path(@quest.quest_master, @quest) %>
+	<% else %>
+		<%= link_to "Join this Quest", quest_memberships_path(:quest_id => @quest), :method => :post %>
+	<% end %>
 <% end %>
 

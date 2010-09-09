@@ -1,11 +1,8 @@
 <h1>Listing quests</h1>
 
 <% @quests.each do |quest| %>
-  
-  <h3><%= quest.title %></h3>
-  <p><%= quest.description %></p>
-  <p>Quest master is <b><%= link_to quest.quest_master.username, user_path(quest.quest_master) %></b></p>
-  <p>Goal Distance: <b><%= quest.distance %></b></p>
+
+  <%= render :partial => "quest_summary", :locals => { :quest => quest } %>
   <p>
 	<% if !current_user.nil? && current_user == quest.quest_master %>
 		<%= link_to 'Show', user_quest_path(current_user, quest) %> | 

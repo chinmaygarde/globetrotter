@@ -28,11 +28,11 @@
 	
 </p>
 
-<%= link_to 'Checkpoints', user_checkpoints_path(@user) %> | 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', user_path(@user) %> | 
+
+
 <% if current_user %>
 	<% if @user == current_user %>
+		<%= link_to 'View Checkpoints', user_checkpoints_path(@user) %> | 
 		This is You!
 	<% else %>
 		<%= link_to "Add as friend",  friendships_path(:friend_id => @user), :method => :post %>

@@ -30,7 +30,7 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
 		<% if !@checkpoints.blank? %>
-			var myLatlng = new google.maps.LatLng(<%= @checkpoints.first.latitude %>,<%= @checkpoints.first.longitude %>);
+			var myLatlng = new google.maps.LatLng(<%= @checkpoints.last.latitude %>,<%= @checkpoints.last.longitude %>);
 		<% else %>
 			var myLatlng = new google.maps.LatLng(37.323,-122.031);
 		<% end %>		

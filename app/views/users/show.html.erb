@@ -1,34 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p><%= image_tag gravatar(@user) %></p>
-
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<%= render :partial => "users/user_profile_small", :locals => { :user => @user } %>
 
 <p>
 	<% if @user.friendships.blank? %>
 	  <b>No friends :(</b>
 	<% else %>
-		<b><%= @user.username %>'s Friends:</b><br />
+		<b><%= @user.username %>'s <%= pluralize(@user.friends.count, "friend") %>:</b><br />
 		<ul style="list-style-type: none">
 		  <% for friendship in @user.friendships %>
-	    	<li><%= image_tag gravatar(friendship.friend) %><br/>
-				<%= friendship.friend.username %> (<%= link_to "Remove", friendship, :method => :delete %>)<br />
-			</li>
+	    	<li><%= render :partial => "users/user_profile_small", :locals => { :user => friendship.friend } %></li>
 		  <% end %>			
 		</ul>
-	<% end %>
-	
+	<% end %>	
 </p>
-
-
 
 <% if current_user %>
 	<% if @user == current_user %>

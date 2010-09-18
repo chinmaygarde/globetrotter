@@ -8,7 +8,7 @@
 <% if !@checkpoints.blank? %>
 	<h3>Checkpoints Listed</h3>
 	<ul>
-	<% @checkpoints.each do |checkpoint| %>
+	<% @checkpoints.reverse.each do |checkpoint| %>
 		<li>
 		<% if !checkpoint.address.nil? %>
 			At <i><%= checkpoint.address %></i>

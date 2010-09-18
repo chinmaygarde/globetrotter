@@ -3,7 +3,7 @@ class CheckpointsController < ApplicationController
   # GET /checkpoints
   # GET /checkpoints.xml
   def index
-    @checkpoints = Checkpoint.where(:user_id => params[:user_id]).order("created_at DESC")
+    @checkpoints = Checkpoint.where(:user_id => params[:user_id]).order("created_at ASC")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @checkpoints }

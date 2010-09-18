@@ -1,30 +1,32 @@
-<p>
-  <b>Title:</b>
-  <%= quest.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= quest.description %>
-</p>
-
+<h1><%= quest.title %></h1>
+<div id="quest_description">
+	<%= quest.description %>
+</div>
 <p>
   <b>Quest master:</b>
-  <%= link_to quest.quest_master.username, user_path(quest.quest_master) %>
+  <%= link_to quest.quest_master.username, user_path(quest.quest_master) %><br />
+  <%= image_tag gravatar(quest.quest_master.email) %>
 </p>
 
 <p>
   <b>Percent Complete:</b>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
-		$("#progressbar").progressbar({ value: 37 });
+		$("#progressbar<%= quest.id %>").progressBar(<%= quest.percent_complete %>, { 
+			max				: 100,
+			boxImage		: '/images/progressbar.gif',
+			barImage		: {
+				0:  '/images/progressbg_red.gif',
+				30: '/images/progressbg_orange.gif',
+				70: '/images/progressbg_green.gif'
+			}
+		});
 	});
 </script>
-	<div id="progressbar"></div>
-  <%= quest.percent_complete %>
+	<div id="progressbar<%= quest.id %>"></div>
 </p>
 
 <p>
   <b>Distance:</b>
-  <%= quest.distance %>
+	<%= quest.distance_complete %> completed of <%= quest.distance %>
 </p>

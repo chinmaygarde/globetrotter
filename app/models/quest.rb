@@ -16,7 +16,12 @@ class Quest < ActiveRecord::Base
   end
   
   def percent_complete
-    distance_complete / distance
+    complete = (distance_complete / distance) * 100
+    if complete > 100
+      100
+    else
+      complete
+    end
   end
   
 end

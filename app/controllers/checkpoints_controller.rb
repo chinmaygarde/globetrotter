@@ -3,7 +3,7 @@ class CheckpointsController < ApplicationController
   # GET /checkpoints
   # GET /checkpoints.xml
   def index
-    @checkpoints = Checkpoint.find_all_by_user_id params[:user_id]
+    @checkpoints = Checkpoint.where(:user_id => params[:user_id]).order("created_at DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @checkpoints }
@@ -32,11 +32,6 @@ class CheckpointsController < ApplicationController
     end
   end
 
-  # GET /checkpoints/1/edit
-  def edit
-    @checkpoint = Checkpoint.find(params[:id])
-  end
-
   # POST /checkpoints
   # POST /checkpoints.xml
   def create
@@ -48,22 +43,6 @@ class CheckpointsController < ApplicationController
         format.xml  { render :xml => @checkpoint, :status => :created, :location => @checkpoint }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @checkpoint.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /checkpoints/1
-  # PUT /checkpoints/1.xml
-  def update
-    @checkpoint = Checkpoint.find(params[:id])
-    @checkpoint.user = current_user
-    respond_to do |format|
-      if @checkpoint.update_attributes(params[:checkpoint])
-        format.html { redirect_to([@checkpoint.user, @checkpoint], :notice => 'Checkpoint was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
         format.xml  { render :xml => @checkpoint.errors, :status => :unprocessable_entity }
       end
     end

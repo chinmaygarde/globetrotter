@@ -4,9 +4,9 @@ class QuestsController < ApplicationController
   # GET /quests.xml
   def index
     if params[:user_id]
-          @quests = User.find(params[:user_id]).quests
+          @quests = User.find(params[:user_id]).quests.order("created_at DESC")
     else
-          @quests = Quest.all
+          @quests = Quest.order("created_at DESC")
     end
     respond_to do |format|
       format.html # index.html.erb

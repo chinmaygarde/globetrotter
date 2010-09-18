@@ -1,21 +1,17 @@
+<% if current_user %>
+	<%= link_to 'Add New Checkpoint', new_user_checkpoint_path(current_user) %>
+<% end %>
+
 <div id="map_canvas" style="width:100%; height:480px"></div>
+<br />
+
 <% if !@checkpoints.blank? %>
-	<table>
-	  <tr>
-	    <th>Latitude</th>
-	    <th>Longitude</th>
-	    <th></th>
-	    <th></th>
-	  </tr>
+	<h3>Checkpoints Listed</h3>
+	<ul>
 	<% @checkpoints.each do |checkpoint| %>
-	  <tr>
-	    <td><%= checkpoint.latitude %></td>
-	    <td><%= checkpoint.longitude %></td>
-	    <td><%= link_to 'Show', user_checkpoint_path(checkpoint.user, checkpoint) %></td>
-	    <td><%= link_to 'Edit', edit_user_checkpoint_path(checkpoint.user, checkpoint) %></td>
-	  </tr>
+		<li>At <%= link_to "#{checkpoint.latitude}, #{checkpoint.longitude}", user_checkpoint_path(checkpoint.user, checkpoint) %></li>
 	<% end %>
-	</table>
+	</ul>
 <% else %>
 	<p>No checkpoints :(</p>
 <% end %>
@@ -24,7 +20,6 @@
 <% if current_user %>
 	<%= link_to 'Add New Checkpoint', new_user_checkpoint_path(current_user) %>
 <% end %>
-
 
 <!-- Maps Javascript -->
 <script type="text/javascript" charset="utf-8">

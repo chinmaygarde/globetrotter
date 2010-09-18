@@ -1,0 +1,2 @@
+<% user = journey.from_checkpoint.user %>
+<%= link_to journey.user.username, user_path(journey.user) %> travelled from <%= link_to "#{journey.from_checkpoint.latitude}, #{journey.from_checkpoint.longitude}", user_checkpoint_path(user, journey.from_checkpoint) %> to <%= link_to "#{journey.to_checkpoint.latitude}, #{journey.to_checkpoint.longitude}", user_checkpoint_path(user, journey.to_checkpoint) %> covering a distance of  <%= journey.distance %> kms.

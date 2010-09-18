@@ -15,10 +15,7 @@
 <% if !@quest.journeys.blank? %>
 	<p><b>Recent Contributions: </b></p>
   <% for journey in @quest.journeys %>
-	<p><b>By:</b> <%= link_to journey.user.username, user_path(journey.user) %></p>
-    <p><b>From:</b> <%= journey.from_checkpoint.latitude %>, <%= journey.from_checkpoint.longitude %> </p>
-    <p><b>To:</b> <%= journey.to_checkpoint.latitude %>, <%= journey.to_checkpoint.longitude %> </p>
-    <p><b>Distance:</b> <%= journey.distance %> </p>
+	<%= render :partial => "journeys/journey_profile", :locals => { :journey => journey } %>
 	<hr />
   <% end %>
 <% else %>

@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 <p>
-  At <%= @checkpoint.latitude %> <%= @checkpoint.longitude %> by <%= link_to @checkpoint.user.username, user_path(@checkpoint.user) %>
+	<% if !@checkpoint.address.nil? %>
+		At <%= @checkpoint.address %>
+	<% end %>
+	<b>(<%= @checkpoint.latitude %> <%= @checkpoint.longitude %>)</b> by <%= link_to @checkpoint.user.username, user_path(@checkpoint.user) %>
 </p>
 
 <div id="map_canvas" style="width:100%; height:480px"></div>

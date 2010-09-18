@@ -1,7 +1,7 @@
 class Checkpoint < ActiveRecord::Base
   belongs_to :user
   validates_numericality_of :latitude, :longitude
-  after_create :add_journey_and_update_quests
+  after_create :add_journey_and_update_quests, :reverse_geocode
   acts_as_mappable :default_units => :kms, :lat_column_name => :latitude, :lng_column_name => :longitude
   
   private
@@ -21,5 +21,16 @@ class Checkpoint < ActiveRecord::Base
         quest.journeys << journey
       end
     end
+  end
+  
+  def reverse_geocode
+    # TODO: Add to background queue
+    result = Geokit::Geocoders::MultiGeocoder.reverse_geocode([latitude, longitude])
+    if result.success
+      self.address = result.full_address
+    else
+      self.address = "#{latitude}, #{longitude}"
+    end
+    self.save
   end
 end

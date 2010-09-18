@@ -9,7 +9,12 @@
 	<h3>Checkpoints Listed</h3>
 	<ul>
 	<% @checkpoints.each do |checkpoint| %>
-		<li>At <%= link_to "#{checkpoint.latitude}, #{checkpoint.longitude}", user_checkpoint_path(checkpoint.user, checkpoint) %></li>
+		<li>
+		<% if !checkpoint.address.nil? %>
+			At <i><%= checkpoint.address %></i>
+		<% end %>
+		<b>(<%= checkpoint.latitude %> <%= checkpoint.longitude %>)</b> by <%= link_to checkpoint.user.username, user_path(checkpoint.user) %>
+		</li>
 	<% end %>
 	</ul>
 <% else %>

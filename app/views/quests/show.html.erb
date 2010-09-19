@@ -14,7 +14,7 @@
 <% end %>
 <% if !@quest.journeys.blank? %>
 	<p><b>Recent Contributions: </b></p>
-  <% for journey in @quest.journeys %>
+  <% for journey in @quest.journeys.reverse %>
 	<%= render :partial => "journeys/journey_profile", :locals => { :journey => journey } %>
 	<hr />
   <% end %>

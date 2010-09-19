@@ -28,6 +28,10 @@ class Quest < ActiveRecord::Base
     if distance_complete >= self.distance
       self.completed = true
       self.save
+      self.members.each do |member|
+        member.send_notification("You have completed the '#{self.title}' quest")
+      end
+      self.quest_master.send_notification("You have completed '#{self.title}' quest")
     end
   end
 end

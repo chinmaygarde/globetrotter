@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     self.notifications.where(:read => false)
   end
   
+  #TODO: Replace with more robust solution
+  def send_notification(message)
+    self.notifications.create(:message => message)
+  end
+  
   private
   def add_life_quest
     quest = quests.build(:title => DEFAULT_QUEST["title"], :description => DEFAULT_QUEST["description"], :distance => DEFAULT_QUEST["distance"])

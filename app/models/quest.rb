@@ -23,5 +23,11 @@ class Quest < ActiveRecord::Base
       complete
     end
   end
-  
+
+  def update_completed_flag
+    if distance_complete >= self.distance
+      self.completed = true
+      self.save
+    end
+  end
 end

@@ -14,11 +14,17 @@ class Checkpoint < ActiveRecord::Base
       journey.save
       
       user.quests_as_member.each do |quest_as_member|
-        quest_as_member.journeys << journey
+        if !quest_as_member.completed?
+          quest_as_member.journeys << journey
+          quest_as_member.update_completed_flag
+        end
       end
       
       user.quests.each do |quest|
-        quest.journeys << journey
+        if !quest.completed?
+          quest.journeys << journey
+          quest.update_completed_flag
+        end
       end
     end
   end

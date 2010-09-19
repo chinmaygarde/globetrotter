@@ -1,9 +1,16 @@
 <h1><%= quest.title %></h1>
-<div id="quest_description">
+<div class="quest_description">
 	<%= quest.description %>
+	<i>
+		<% if !quest.completed? %>
+		  (Ongoing)
+		<% else %>
+		  (Completed)
+		<% end %>
+	</i>
 </div>
 <p>
-  <b>Quest master:</b>
+  Quest master: 
   <%= link_to quest.quest_master.username, user_path(quest.quest_master) %><br />
   <%= image_tag gravatar(quest.quest_master.email) %>
 </p>

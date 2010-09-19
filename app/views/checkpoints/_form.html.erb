@@ -10,6 +10,37 @@
       </ul>
     </div>
   <% end %>
+	<input type="button" value="Get Current Location" id="getLocationButton" style="display:none;">
+	<div id="loading_notification" style="display:none;">
+		<%= image_tag "loader.gif" %> Getting your location. This might take a while...
+	</div>
+	<br />
+	<script type="text/javascript" charset="utf-8">
+		
+		//  Need refernce to the global map object;
+		var map;
+		
+		$(document).ready(function(){
+			if (navigator.geolocation) 
+			{
+				$("#getLocationButton").css("display", "block");
+			};
+			$("#getLocationButton").click(function(){
+				$("#loading_notification").css("display", "block");
+				$("#getLocationButton").css("display", "none");
+				navigator.geolocation.getCurrentPosition(function(position){
+					$("#checkpoint_latitude").val(position.coords.latitude.toString());
+					$("#checkpoint_longitude").val(position.coords.longitude.toString());
+					$("#loading_notification").html("<b>Successfully retrieved your location</b>");
+					map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+					map.setZoom(14);
+				}, function(error){
+					$("#loading_notification").html("<b>Sorry. Could not get your location. Please enter it manually</b>");
+				});
+			});
+		});
+	</script>
+
 	<!-- Maps Javascript -->
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
@@ -19,7 +50,7 @@
 				center: myLatlng,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
-			var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 			google.maps.event.addListener(map, "center_changed", function(event) {
 				$("#checkpoint_latitude").val(map.getCenter().lat().toString());
 				$("#checkpoint_longitude").val(map.getCenter().lng().toString());

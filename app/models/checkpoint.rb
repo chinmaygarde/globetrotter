@@ -29,8 +29,8 @@ class Checkpoint < ActiveRecord::Base
     end
   end
   
+  # TODO: Add to background queue
   def reverse_geocode
-    # TODO: Add to background queue
     result = Geokit::Geocoders::MultiGeocoder.reverse_geocode([latitude, longitude])
     if result.success
       self.address = result.full_address

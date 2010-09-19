@@ -4,7 +4,7 @@
 
 <p>
 	<% if @user.friendships.blank? %>
-	  <b>No friends :(</b>
+	  <b><%= @user.username %> has not added any friends</b>
 	<% else %>
 		<b><%= @user.username %>'s <%= pluralize(@user.friends.count, "friend") %>:</b><br />
 		<ul style="list-style-type: none">
@@ -20,7 +20,7 @@
 		<%= link_to 'View Checkpoints', user_checkpoints_path(@user) %> | 
 		This is You!
 	<% else %>
-		<%= link_to "Add as friend",  friendships_path(:friend_id => @user), :method => :post %>
+		<%= link_to "Add #{@user.username} as friend",  friendships_path(:friend_id => @user), :method => :post %>
 	<% end %>
 <% else %>
 	<%= @user.username %> is using GlobeTrotter. <%= link_to "Join now", register_path %>

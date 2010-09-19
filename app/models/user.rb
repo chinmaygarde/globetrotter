@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   has_many :journeys
   has_many :quests, :class_name => "Quest", :foreign_key => "quest_master"
+  has_many :notifications
   
   has_many :quest_memberships, :class_name => "QuestMembership", :foreign_key => "user_id"
   has_many :quests_as_member, :through => :quest_memberships, :source => :quest
@@ -15,6 +16,10 @@ class User < ActiveRecord::Base
   define_index do
     indexes username, :sortable => true
     indexes email, :sortable => true
+  end
+  
+  def unread_notifications
+    self.notifications.where(:read => false)
   end
   
   private

@@ -1,0 +1,10 @@
+<% if !@notifications.blank? %>
+	<h2>Your unread notifications</h2>
+	<ul>
+  <% for notification in @notifications %>
+    <li><%= notification.message %> <i>(<%= time_ago_in_words(notification.created_at) %>)</i></li>
+  <% end %>
+	</ul>
+<% else %>
+  <h2>You have no unread notifications</h2>
+<% end %>

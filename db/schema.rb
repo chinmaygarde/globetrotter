@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918202006) do
+ActiveRecord::Schema.define(:version => 20100919091435) do
 
   create_table "checkpoints", :force => true do |t|
     t.float    "latitude"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 20100918202006) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "distance"
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "read",       :default => false
   end
 
   create_table "quest_memberships", :force => true do |t|

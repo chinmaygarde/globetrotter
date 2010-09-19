@@ -13,6 +13,7 @@ Globetrotter::Application.routes.draw do
   resources :users do
     resources :checkpoints
     resources :quests
+    resources :notifications, :only => [:index]
     collection do
       get 'suggest'
     end

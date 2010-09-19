@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       redirect_to(root_url, :notice => 'Registration was successful.')
+      @user.notifications.create(:message => "Welcome to GlobeTrotter.")
     else
       render :action => "new"
     end

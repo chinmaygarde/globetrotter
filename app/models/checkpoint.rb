@@ -37,6 +37,5 @@ class Checkpoint < ActiveRecord::Base
     else
       self.address = "#{latitude}, #{longitude}"
     end
-    self.save
   end
 end

@@ -34,4 +34,5 @@ gem 'mysql'
 group :development, :test do
   gem "rspec-rails", ">= 2.0.0.beta.19"
   gem "autotest"
+  gem 'factory_girl_rails'
 end
